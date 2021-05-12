@@ -36,9 +36,6 @@ if exists('g:vscode')
 	" Find in files under cursor
 	nnoremap <silent> ? <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 
-	" Open defintion aside
-	nnoremap <silent> <C-w>gd <Cmd>call VSCodeNotify('editor.action.revealDefinitionAside')<CR>
-
 	" vim-sandwich
 	highlight OperatorSandwichBuns guifg='#aa91a0' gui=underline ctermfg=172 cterm=underline
 	highlight OperatorSandwichChange guifg='#F8D97C' gui=underline ctermfg='yellow' cterm=underline
