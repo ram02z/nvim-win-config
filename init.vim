@@ -52,7 +52,7 @@ if exists('g:vscode')
 
 	" Comments
 	xmap <C-/> <Plug>VSCodeCommentarygv
-    	nmap <C-/> <Plug>VSCodeCommentaryLine
+    nmap <C-/> <Plug>VSCodeCommentaryLine
 
 	nmap <C-a> <Plug>(dial-increment)
 	vmap <C-a> <Plug>(dial-increment)
