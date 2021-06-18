@@ -7,12 +7,21 @@ Plug 'nacro90/numb.nvim'
 
 Plug 'monaqa/dial.nvim'
 
-Plug 'b0o/vim-shot-f'
+Plug 'rhysd/clever-f.vim'
 
 call plug#end()
 
-
 let mapleader = "\<Space>"
+
+map ; <Plug>(clever-f-repeat-forward)
+map , <Plug>(clever-f-repeat-back)
+nmap <Esc> <Plug>(clever-f-reset)
+
+let g:clever_f_smart_case = 1
+let g:clever_f_chars_match_any_signs = ';' 
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_mark_direct = 1
+highlight CleverFDefaultLabel guifg='#ff007c' guibg=NONE gui=bold ctermfg=162 cterm=NONE
 
 if !exists("g:os")
     if has("win64") || has("win32") || has("win16")
@@ -66,9 +75,9 @@ if exists('g:vscode')
 
 	" vim-sandwich
 	highlight OperatorSandwichBuns guifg='#aa91a0' gui=underline ctermfg=172 cterm=underline
-	highlight OperatorSandwichDelete guibg='#ff5555' gui=none ctermbg='red' cterm=none
-	highlight OperatorSandwichChange guifg='#F8D97C' gui=underline ctermfg='yellow' cterm=underline
-	highlight OperatorSandwichAdd guibg='#50fa7b' gui=none ctermbg='green' cterm=none
+	highlight OperatorSandwichDelete guibg='#ff5555' gui=none ctermbg=red cterm=none
+	highlight OperatorSandwichChange guifg='#F8D97C' gui=underline ctermfg=yellow cterm=underline
+	highlight OperatorSandwichAdd guibg='#50fa7b' gui=none ctermbg=green cterm=none
 
 	" Vim quickscope
 	" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -87,8 +96,9 @@ if exists('g:vscode')
 	vmap <C-x> <Plug>(dial-decrement)
 	vmap g<C-a> <Plug>(dial-increment-additional)
 	vmap g<C-x> <Plug>(dial-decrement-additional)
-
+else
+	set mouse=a
+	set termguicolors
 endif
 
 lua require('numb').setup()
-
