@@ -15,13 +15,17 @@ let mapleader = "\<Space>"
 
 map ; <Plug>(clever-f-repeat-forward)
 map , <Plug>(clever-f-repeat-back)
-nmap <Esc> <Plug>(clever-f-reset)
+nmap <Esc> <Plug>(clever-f-reset)<cmd>noh<CR>
 
 let g:clever_f_smart_case = 1
-let g:clever_f_chars_match_any_signs = ';' 
+let g:clever_f_chars_match_any_signs = ';'
 let g:clever_f_fix_key_direction = 1
 let g:clever_f_mark_direct = 1
 highlight CleverFDefaultLabel guifg='#ff007c' guibg=NONE gui=bold ctermfg=162 cterm=NONE
+
+runtime macros/sandwich/keymap/surround.vim
+
+au! CmdlineEnter * ++once lua require("numb").setup()
 
 if !exists("g:os")
     if has("win64") || has("win32") || has("win16")
@@ -45,10 +49,10 @@ elseif g:os == "Darwin"
 endif
 
 if executable(s:clip)
-	augroup Yank
-      autocmd!
-      autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-	  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+    augroup Yank
+	autocmd!
+	autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+	autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
     augroup END
 end
 
@@ -79,17 +83,14 @@ if exists('g:vscode')
 	highlight OperatorSandwichChange guifg='#F8D97C' gui=underline ctermfg=yellow cterm=underline
 	highlight OperatorSandwichAdd guibg='#50fa7b' gui=none ctermbg=green cterm=none
 
-	" Vim quickscope
-	" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-	" highlight QuickScopePrimary guifg='#ff007c' gui=underline ctermfg=155 cterm=underline
-	" highlight QuickScopeSecondary guifg='#2b8db3' gui=underline ctermfg=81 cterm=underline
-
 	let g:shot_f_highlight_graph = "guifg='#ff007c' guibg=NONE gui=bold ctermfg=155 cterm=NONE"
 	let g:shot_f_highlight_blank = "ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE"
 	" Comments
-	xmap <C-/> <Plug>VSCodeCommentarygv
-	nmap <C-/> <Plug>VSCodeCommentaryLine
-
+	xmap gc  <Plug>VSCodeCommentary
+	nmap gc  <Plug>VSCodeCommentary
+	omap gc  <Plug>VSCodeCommentary
+	nmap gcc <Plug>VSCodeCommentaryLine
+	" Increment/decrement
 	nmap <C-a> <Plug>(dial-increment)
 	vmap <C-a> <Plug>(dial-increment)
 	nmap <C-x> <Plug>(dial-decrement)
@@ -101,4 +102,3 @@ else
 	set termguicolors
 endif
 
-lua require('numb').setup()
