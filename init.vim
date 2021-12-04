@@ -9,6 +9,8 @@ Plug 'monaqa/dial.nvim'
 
 Plug 'rhysd/clever-f.vim'
 
+Plug 'rhysd/committia.vim'
+
 call plug#end()
 
 let mapleader = "\<Space>"
